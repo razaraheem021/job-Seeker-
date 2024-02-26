@@ -1,27 +1,28 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
-import Button from "@mui/material/Button";
-import { styled } from "@mui/material";
 
+import { ThemeProvider } from "@/components/theme-provider";
+// import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from '@/components/Navbar';
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
 function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <>
-      <Button variant="text">Text</Button>
-      <Button variant="contained">Contained</Button>
-      <Button variant="outlined">Outlined</Button>
-      <StyledButton variant="contained">check</StyledButton>
-    </>
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <Router>
+        <Navbar/>
+        <Routes>
+        <Route exact path="/" element={<Home/>} />
+        <Route path="/about" element={<About/>} />
+        <Route path="/contact" element={<Contact/>} />
+      </Routes>
+      </Router>
+      
+    </ThemeProvider>
   );
 }
 
 export default App;
-
-const StyledButton = styled(Button)({
-  flexGrow: 1,
-  maxWidth: 400,
-  backgroundColor: "#f00",
-});
