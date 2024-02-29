@@ -57,7 +57,7 @@ const Menu = styled.ul`
   @media (max-width: 768px) {
     flex-direction: column;
     align-items: flex-start;
-    display: ${({ isopen }) => (isopen ? 'block' : 'none')};
+    display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
   }
 `;
 
@@ -71,10 +71,10 @@ const MenuItem = styled.li`
 `;
 
 const Navbar = () => {
-  const [isopen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
-    setIsOpen(!isopen);
+    setIsOpen(!isOpen);
   };
 
   return (
@@ -83,16 +83,16 @@ const Navbar = () => {
       <MenuIcon onClick={toggleMenu}>
         <i className="fas fa-bars"></i>
       </MenuIcon>
-      <Menu isopen={isopen}>
+      <Menu isOpen={isOpen}>
         <ModeToggle />
         <MenuItem>
-          <StyledNavlink exact to="/">Home</StyledNavlink> {/* Use NavLink */}
+          <StyledNavlink exact to="/" activeClassName="active">Home</StyledNavlink> {/* Use NavLink */}
         </MenuItem>
         <MenuItem>
-          <StyledNavlink to="/about" >About</StyledNavlink> {/* Use NavLink */}
+          <StyledNavlink to="/about" activeClassName="active">About</StyledNavlink> {/* Use NavLink */}
         </MenuItem>
         <MenuItem>
-          <StyledNavlink to="/contact">Contact</StyledNavlink> {/* Use NavLink */}
+          <StyledNavlink to="/contact" activeClassName="active">Contact</StyledNavlink> {/* Use NavLink */}
         </MenuItem>
       </Menu>
     </Nav>
