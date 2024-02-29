@@ -101,13 +101,76 @@
 
 // export default CustomStepper;
 
-import React from 'react'
-import Main from './main'
+import React, { useEffect } from "react";
+import Main from "./main";
+import { useDispatch, useSelector } from 'react-redux';
+import { getCurrentUser, postLoginUser, postRegisterUser } from "@/redux/features/Users";
 
 const index = () => {
-  return (
-    <div><Main/></div>
-  )
-}
+  const dispatch = useDispatch();
+  const baseUrl = import.meta.env.VITE_REACT_APP_BASE_URL;
+const user=useSelector((state)=>state.users.user)
+const mydata=useSelector((state)=>state.users)
 
-export default index
+
+console.log(mydata)
+
+
+
+
+
+useEffect(()=>{
+dispatch(getCurrentUser());
+},[dispatch])
+
+
+useEffect(()=>{
+console.log(user)
+},[])
+
+  const handleLoginUser =()=>{
+    try {
+      const data={
+        email:"az@gmail.com",
+        password:"12345678",
+        role:"Job Seeker"
+    }
+    dispatch(postLoginUser(data));
+    } catch (error) {
+      console.error('Error logging in:', error);
+    }
+  }
+  const handleRegionUser =()=>{
+    try {
+      const data={
+        "name":"pasaaa",
+        "email":"z27azp@gmail.com",
+        "phone":1234567,
+        "role":"Job Seeker",
+        "password":"12345678"
+    }
+    dispatch(postRegisterUser(data));
+    } catch (error) {
+      console.error('Error logging in:', error);
+    }
+  }
+  return (
+    <div>
+      <p>Base URL: {baseUrl}</p>
+      <button onClick={handleLoginUser}>Click Me</button>
+      <br />
+      <br />
+      <br />
+      <p>{user?.name}</p>
+      <br />
+      <br />
+      <br />
+      <button onClick={handleRegionUser} >Clcik</button>
+      <br />
+      <br />
+      <Main />
+    </div>
+  );
+};
+
+export default index;
